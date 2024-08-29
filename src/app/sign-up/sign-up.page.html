@@ -1,0 +1,195 @@
+<div style="background-color: #fff">
+  <ion-card>
+    <ion-img src="../assets/img/astrologerImg.png" alt=""></ion-img>
+    <ion-card-header>
+      <ion-card-title id="header-bottom">Test Astrologer</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</div>
+
+<ion-content>
+  <h1>Sign Up</h1>
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <div class="title">
+        <mat-form-field appearance="outline" class="input-group">
+          <mat-label>Account Type</mat-label>
+          <mat-select formControlName="accountType" placeholder="">
+            <mat-option value="user" (click)="conditionUser()">User</mat-option>
+            <mat-option value="astrologer" (click)="conditionAstro()"
+              >Astrologer</mat-option
+            >
+          </mat-select>
+          <mat-error
+            *ngIf="signUpForm.get('accountType')!.hasError('required')"
+          >
+            Account Type is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="name-em-mo">
+        <div class="name">
+          <mat-form-field appearance="outline" class="input-group">
+            <mat-label>First name</mat-label>
+            <input matInput type="text" formControlName="firstName" />
+            <mat-error
+              *ngIf="signUpForm.get('firstName')!.hasError('required')"
+            >
+              First name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="last">
+          <mat-form-field appearance="outline" class="input-group">
+            <mat-label>Last name</mat-label>
+            <input matInput type="text" formControlName="lastName" />
+            <mat-error *ngIf="signUpForm.get('lastName')!.hasError('required')">
+              Last name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="name-em-mo">
+        <div class="bd">
+          <mat-form-field appearance="outline" class="input-group">
+            <mat-label>Birth Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              type="text"
+              formControlName="birthDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error
+              *ngIf="signUpForm.get('birthDate')!.hasError('required')"
+            >
+              Birth date is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="gender">
+          <mat-form-field appearance="outline" class="input-group">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="male">Male</mat-option>
+              <mat-option value="female">Female</mat-option>
+            </mat-select>
+            <mat-error *ngIf="signUpForm.get('gender')!.hasError('required')">
+              Gender is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="title" *ngIf="astrologer">
+        <mat-form-field appearance="outline" class="input-group">
+          <mat-label>Specialization</mat-label>
+          <mat-select formControlName="specialization">
+            <mat-option value="vedic">Vedic</mat-option>
+            <mat-option value="tarot">Tarot</mat-option>
+            <mat-option value="face reading">Face Reading</mat-option>
+            <mat-option value="psychologist">Psychologist</mat-option>
+            <mat-option value="lal kitab">Lal Kitab</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="signUpForm.get('specialization')!.hasError('required')"
+          >
+            Specialization is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="name-em-mo" *ngIf="astrologer">
+        <div class="lang">
+          <mat-form-field appearance="outline" class="input-group">
+            <mat-label>Language</mat-label>
+            <mat-select formControlName="language">
+              <mat-option value="male">Hindi</mat-option>
+              <mat-option value="female">Marathi</mat-option>
+              <mat-option value="male">English</mat-option>
+              <mat-option value="female">Tamil</mat-option>
+            </mat-select>
+            <mat-error *ngIf="signUpForm.get('language')!.hasError('required')">
+              Language is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="last">
+          <mat-form-field appearance="outline" class="input-group">
+            <mat-label>Total Exp in month</mat-label>
+            <input matInput type="text" formControlName="experience" />
+            <mat-error
+              *ngIf="signUpForm.get('experience')!.hasError('required')"
+            >
+              Experience is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="bt" *ngIf="user">
+        <mat-form-field appearance="outline" class="input-group">
+          <mat-label>HH:MM</mat-label>
+          <input
+            matInput
+            [ngxMatTimepicker]="pickerTime"
+            readonly
+            formControlName="time"
+          />
+          <mat-icon matSuffix>access_time</mat-icon>
+          <ngx-mat-timepicker #pickerTime></ngx-mat-timepicker>
+          <mat-error *ngIf="signUpForm.get('time')!.hasError('required')">
+            Time is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="phone">
+        <mat-form-field appearance="outline" class="input-group">
+          <mat-label>Phone number</mat-label>
+          <input matInput type="text" formControlName="phoneNumber" />
+          <mat-error
+            *ngIf="signUpForm.get('phoneNumber')!.hasError('required')"
+          >
+            Phone number is required
+          </mat-error>
+          <mat-error *ngIf="signUpForm.get('phoneNumber')!.hasError('pattern')">
+            Enter a valid phone number
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="email">
+        <mat-form-field appearance="outline" class="input-group">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" formControlName="email" />
+          <mat-error *ngIf="signUpForm.get('email')!.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="signUpForm.get('email')!.hasError('pattern')">
+            Enter a valid email
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-checkbox class="policy-checkbox" formControlName="agree">
+        <div>
+          I have read Test Astrologer
+          <a style="color: blue">Privacy Policy</a> and agree to the
+          <a style="color: blue">Terms and Conditions</a>
+        </div>
+      </mat-checkbox>
+      <div
+        *ngIf="signUpForm.get('agree')?.hasError('requiredTrue') && signUpForm.get('agree')?.touched"
+      >
+        You must agree to the terms and conditions.
+      </div>
+    </ion-list>
+    <ion-button expand="block" type="submit" [disabled]="signUpForm.invalid"
+      >GET OTP</ion-button
+    >
+  </form>
+</ion-content>

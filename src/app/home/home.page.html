@@ -1,0 +1,97 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title id="header-top" (click)="openSignInPage()">Skip</ion-card-title>
+    </ion-card-header>
+    <ion-img src="../assets/img/astrologerImg.png" alt=""></ion-img>
+    <ion-card-header>
+      <ion-card-title id="header-bottom">Test Astrologer</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <!--data of signin page-->
+  <div *ngIf="signIn  ">
+    <h1>Sign In</h1>
+    <form [formGroup]="signInForm" (ngSubmit)="onSignIn(signInForm.get('mobileNumber')?.value)">
+    <div class="input">
+      <mat-form-field appearance="outline" class="input-group">
+        <mat-label>Mobile number</mat-label>
+        <input matInput type="tel" formControlName="mobileNumber" />
+        <mat-error *ngIf="signInForm.get('mobileNumber')!.hasError('required')">
+          Phone number is required
+        </mat-error>
+        <mat-error *ngIf="signInForm.get('mobileNumber')!.hasError('pattern')">
+          Enter a valid phone number
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <mat-checkbox class="policy-checkbox" formControlName="agree">
+      <div>
+        I have read Test Astrologer <a style="color: blue;">Privacy Policy</a> and agree to the <a style="color: blue;">Terms and conditions</a>
+      </div>
+      </mat-checkbox>
+<ion-button id="btn-top" expand="block" 
+type="submit" [disabled]="signInForm.invalid">GET OTP</ion-button>
+</form>
+
+
+<button id="btn-bottom" expand="block"  (click)="openSignUpPage()">CREATE NEW ACCOUNT</button>
+</div>
+
+<!--data of OTP page-->
+<div *ngIf=otp class="otp-container">
+<h1>Verify OTP</h1>
+
+<form>
+  <div class="otp-inputs">
+    <!--event use to idetify we have click on input field-->
+    <input matInput #digit1 type="tel" formControlName="digit1" 
+    maxlength="1" (input)="onInput($event, digit2)"
+    >
+      <input matInput #digit2 type="tel" formControlName="digit2"
+       maxlength="1" (input)="onInput($event, digit3)"
+       >
+      <input matInput #digit3 type="tel" formControlName="digit3"
+       maxlength="1" (input)="onInput($event, digit4)"
+       >
+      <input matInput #digit4 type="tel" formControlName="digit4" 
+      maxlength="1" (input)="onInput($event, digit4)"
+      >
+      <!--here in input I give extra call to oninput for button enable purpose-->
+
+  </div>
+  <ion-button id="btn-submit" 
+  [disabled]="submitButtonDisabled" (click)="openSignInSuccessPage()">SUBMIT</ion-button>
+</form>
+<div class="otp">
+<div class="timer">Resend OTP available in {{ timer }}s</div>
+  <ion-button id="btn-otp" [disabled]="resendButtonDisabled"
+     (click)="startTimer()">Resend otp</ion-button>
+</div>
+</div>
+
+
+
+
+</ion-content>
+<ion-footer style="box-shadow: none;">
+  <!-- <ion-list class="bottom-input">
+    <ion-item>
+  <ion-input id="first-input" placeholder="">100% privacy</ion-input>
+  <ion-input id="second-input" placeholder="Verified"></ion-input>
+  <ion-input id="third-input" placeholder="Trusted"></ion-input>
+  </ion-item>
+  </ion-list> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col>100% <br> Privacy</ion-col>
+      <ion-col><div style="margin-top: 10px;">Verified</div></ion-col>
+      <ion-col><div style="margin-top: 10px;">Trusted</div> </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-footer>
+
+
+
+ 
+

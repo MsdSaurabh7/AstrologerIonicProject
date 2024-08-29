@@ -1,0 +1,197 @@
+
+  <ion-header>
+    <ion-toolbar class="header" >
+      <div style="display: flex;align-items: center;margin-left: 10px;">
+      <ion-icon name="menu-outline" ></ion-icon>
+      <img *ngIf="home" src="../assets/img/astrologerImg.png" alt="">
+      <ion-text *ngIf="chat" style="font-size: 20px; margin-left: 5%;">Chat Astrologer</ion-text>
+      <ion-text *ngIf="call" style="font-size: 20px; margin-left: 5%;">Call Astrologer</ion-text>
+    </div>
+    <!-- <img *ngIf="home" src="../assets/img/astrologerImg.png" alt=""> -->
+      <div slot="end" style="display: flex;align-items: center;gap: 20px; margin-right: 10px;">
+      <ion-icon *ngIf="home" id="open-modal" name="search-outline"></ion-icon>
+      <ion-icon *ngIf="home" name="wallet-outline" (click)="openSignInPage()"></ion-icon>
+      <ion-icon name="notifications-outline" (click)="openSignInPage()"></ion-icon>
+    </div>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- banner slider -->
+  <ion-content>
+
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content>
+      </ion-refresher-content>
+    </ion-refresher>
+
+
+    <app-banner *ngIf="home" [slides]="slides"></app-banner>
+
+    <!-- chat astrologer -->
+    <div *ngIf="chat" style="margin-top: 10%;">
+<ion-card class="card" *ngFor="let item of object">
+  <!-- *ngFor="let card of object" -->
+  <div class="corner-text">{{item.ratings.description}}</div>
+  <ion-img id="verify-img" src="../assets/img/verify.png"></ion-img>
+  <div class="image-slot">
+    <div id="imge">
+  <ion-img src="../assets/img/profile.png"
+  style="border: 1px solid red; border-radius: 50%;"></ion-img>
+  <div>{{item.currentStatus}}</div>
+</div>
+  <ion-chip [outline]="true">
+    <ion-label>{{item.ratings.ratingCounter}}</ion-label>
+    <ion-icon id="icon" name="star-sharp"></ion-icon>
+  </ion-chip>
+  
+  <span>{{item.receivedOrder}}</span>
+</div>
+  <div class="card-middle">
+    <ion-card-title (click)="this.data.headerName(item)">{{item.salutation}}</ion-card-title>
+    <span> {{item.services[0].serviceTypeCode}}</span>
+    <br>
+    <span>{{item.aboutUs.workExperienceInMonth}}</span>
+    <br>
+    <span *ngFor="let lang of item.languages">{{lang.languageName}},</span>
+    <br><br>
+    <span *ngIf=item.offer><a style="color: red;">FREE</a> <del>{{item.offerAmount}}</del>{{item.currency}} 
+      {{item.rates}} {{item.serviceTimeType}}</span>
+  </div>
+  <div class="cardIcons">
+  <ion-icon name="call-sharp" *ngIf=item.availableConsultationType.mediumStatusCall></ion-icon>
+  <ion-icon name="chatbubble-ellipses-sharp" *ngIf=item.availableConsultationType.mediumStatusChat></ion-icon>
+  <ion-icon name="videocam-sharp" *ngIf=item.availableConsultationType.mediumStatusVideo></ion-icon>
+</div>
+</ion-card>
+</div>
+
+<div *ngIf="call" style="margin-top: 10%;">
+  <ion-card class="card" *ngFor="let item of object">
+    <!-- *ngFor="let card of object" -->
+    <div class="corner-text">{{item.ratings.description}}</div>
+    <ion-img id="verify-img" src="../assets/img/verify.png"></ion-img>
+    <div class="image-slot">
+      <div id="imge">
+    <ion-img src="../assets/img/profile.png"
+    style="border: 1px solid red; border-radius: 50%;"></ion-img>
+    <div>{{item.currentStatus}}</div>
+  </div>
+    <ion-chip [outline]="true">
+      <ion-label>{{item.ratings.ratingCounter}}</ion-label>
+      <ion-icon id="icon" name="star-sharp"></ion-icon>
+    </ion-chip>
+    
+    <span>{{item.receivedOrder}}</span>
+  </div>
+    <div class="card-middle">
+      <ion-card-title (click)="this.data.headerName(item)">{{item.salutation}}</ion-card-title>
+      <span> {{item.services[0].serviceTypeCode}}</span>
+      <br>
+      <span>{{item.aboutUs.workExperienceInMonth}}</span>
+      <br>
+      <span *ngFor="let lang of item.languages">{{lang.languageName}},</span>
+      <br><br>
+      <span *ngIf=item.offer style="padding-top: 20px;"><a style="color: red;">FREE</a> <del>
+        {{item.offerAmount}}</del>{{item.currency}} 
+        {{item.rates}} {{item.serviceTimeType}}</span>
+    </div>
+    <div class="cardIcons">
+    <ion-icon name="call-sharp" *ngIf=item.availableConsultationType.mediumStatusCall></ion-icon>
+    <ion-icon name="chatbubble-ellipses-sharp" *ngIf=item.availableConsultationType.mediumStatusChat></ion-icon>
+    <ion-icon name="videocam-sharp" *ngIf=item.availableConsultationType.mediumStatusVideo></ion-icon>
+  </div>
+  </ion-card>
+  </div>
+  </ion-content>
+<!-- 
+ 
+  
+  
+      
+ -->
+
+
+
+<!-- open modal -->
+<!-- <ion-modal #modal trigger="open-modal" cssClass="inline_modal"
+(ionModalDidDismiss)="reset($event)" [initialBreakpoint]="0.25" 
+[breakpoints]="[0, 0.25, 0.5, 0.75]">
+  <ng-template>
+    <ion-content>
+     <h1>ffsf</h1>
+    </ion-content>
+   </ng-template>
+</ion-modal> -->
+
+<!-- footer -->
+<!-- <ion-footer class="ion-no-border">
+  <ion-toolbar class="footer">
+    <div style="display: flex;gap: 12%;margin-left: 5%;margin-top: 8px;">
+      <div>
+    <ion-icon class="footer-icon" name="home-sharp" style="margin-left: 5px;"
+      [color]="isActive(1) ? 'danger' : 'primary'" 
+    (click)="setActiveButton(1)"></ion-icon> -->
+    <!--we have set custom color of danger and primary in "theme/variables.scss-->
+    <!-- <p style="margin-top: 0%;">Home</p>
+  </div>
+  <div>
+    <ion-icon class="footer-icon" name="chatbubble-ellipses-sharp"
+    [color]="isActive(2) ? 'danger' : 'primary'" 
+    (click)="setActiveButton(2)" (click)="fetchApi('chat')"></ion-icon>
+    <p style="margin-top: 0%;">Chat</p>
+  </div>
+    <div>
+    <ion-icon class="footer-icon" name="videocam-sharp"
+    ion-button 
+    [color]="isActive(3) ? 'danger' : 'primary'" 
+    (click)="setActiveButton(3)"></ion-icon>
+    <p style="margin-top: 0%;">Live</p>
+  </div>
+    <div>
+    <ion-icon class="footer-icon" name="call-sharp"
+    ion-button 
+    [color]="isActive(4) ? 'danger' : 'primary'" 
+    (click)="setActiveButton(4)" (click)="fetchApi('call')"></ion-icon>
+    <p style="margin-top: 0%;">Call</p>
+  </div>
+    <div>
+    <ion-icon class="footer-icon" name="flower-sharp"
+    ion-button 
+    [color]="isActive(5) ? 'danger' : 'primary'" 
+    (click)="setActiveButton(5)"></ion-icon>
+    <p style="margin-top: 0%;">Pooja</p>
+  </div>
+  </div>
+  </ion-toolbar>
+</ion-footer> -->
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="home-sharp" (click)="setActiveButton(1)"
+      [color]="isActive(1) ? 'danger' : 'primary'"></ion-icon>
+      Home
+    </ion-tab-button>
+    <ion-tab-button tab="radio">
+      <ion-icon name="chatbubble-ellipses-sharp"
+       (click)="setActiveButton(2)" (click)="fetchApi('chat')"
+       [color]="isActive(2) ? 'danger' : 'primary'"></ion-icon>
+      Chat
+    </ion-tab-button>
+    <ion-tab-button tab="library">
+      <ion-icon name="videocam-sharp" (click)="setActiveButton(3)"
+      [color]="isActive(3) ? 'danger' : 'primary'"></ion-icon>
+      Live
+    </ion-tab-button>
+    <ion-tab-button tab="search">
+      <ion-icon name="call-sharp" 
+      (click)="setActiveButton(4)" (click)="fetchApi('call')"
+      [color]="isActive(4) ? 'danger' : 'primary'"></ion-icon>
+      Call
+    </ion-tab-button>
+    <ion-tab-button tab="search">
+      <ion-icon name="flower-sharp" (click)="setActiveButton(5)"
+      [color]="isActive(5) ? 'danger' : 'primary'" ></ion-icon>
+      Pooja
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

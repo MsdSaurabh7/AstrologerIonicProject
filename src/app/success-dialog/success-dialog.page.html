@@ -1,0 +1,17 @@
+
+  <div  class="success-dialog" *ngIf="this.data.postVar.messagestatus">
+    <mat-icon style="color: green;">check_circle</mat-icon>
+    <p>{{this.data.postVar.messageType}}</p>
+  </div>
+  <div class="msg" *ngIf="this.data.postVar.messagestatus">
+   {{this.data.postVar.message}}
+  </div>
+  
+  <div *ngIf=!this.data.postVar.messagestatus class="success-dialog">
+    <mat-icon style="color: red;">cancel</mat-icon>
+    <p>{{this.data.postVar.messageType}}</p>
+  </div>
+  <div class="msg" *ngIf=!this.data.postVar.messagestatus>
+    {{this.data.postVar.message}}
+  </div>
+  

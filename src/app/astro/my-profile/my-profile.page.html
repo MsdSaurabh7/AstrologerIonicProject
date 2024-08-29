@@ -1,0 +1,258 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <div style="display: flex; align-items: center; margin-left: 10px">
+      <ion-icon
+        id="back-icon"
+        name="arrow-back-outline"
+        (click)="goBack()"
+      ></ion-icon>
+      <ion-text style="font-size: 20px; margin-left: 25%">My Profile</ion-text>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="--background: #f4e9bdf6">
+  <div id="imge" align="center">
+    <ion-img #profileImg src="{{loginTypeData.profilePhoto}}"></ion-img>
+    <div class="camera-circle">
+      <ion-icon
+        name="camera-outline"
+        id="camera-icon"
+        (click)="triggerFileInput()"
+      ></ion-icon>
+    </div>
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      style="display: none"
+      (change)="onFileChange($event)"
+    />
+  </div>
+  <ion-segment mode="ios" scrollable="true">
+    <ion-segment-button value="buttons" (click)="basicInfoFun()">
+      <ion-label>Basic Info</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="aboutMeFun()">
+      <ion-label>About Me</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="bankDetailsFun()">
+      <ion-label>Bank Details</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="languagesFun()">
+      <ion-label>Languages</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="specializationFun()">
+      <ion-label>Specifications</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="galleryFun()">
+      <ion-label>Gallery</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-card *ngIf="basicInfo">
+    <h3 class="heading">Details</h3>
+    <ion-list>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">First Name</div>
+          <div>{{loginTypeData?.firstName}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Last Name</div>
+          <div>{{loginTypeData?.lastName}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Email</div>
+          <div>{{loginTypeData?.email[0].email}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Birth Time</div>
+          <div>{{loginTypeData?.birthTime}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Birth Date</div>
+          <div>{{ formattedBirthDate }}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Gender</div>
+          <div>{{loginTypeData?.gender}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Mobile</div>
+          <div>{{loginTypeData?.phone[0].phone}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Work Exp.</div>
+          <div>{{loginTypeData?.aboutUs.workExperienceInMonth}}</div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <h3 class="heading">Permanent Address</h3>
+    <ion-list>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">City</div>
+          <div>{{loginTypeData?.address[0].city.cityName}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Areacode</div>
+          <div>{{loginTypeData?.address[0].areaCode}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">State</div>
+          <div>{{loginTypeData?.address[0].state.stateName}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Country</div>
+          <div>{{loginTypeData?.address[0].country.countryName}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">
+            Complete <br />
+            Details
+          </div>
+          <div>{{loginTypeData?.address[0].addressDescription}}</div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <div align="center">
+      <ion-button>+Edit Profile</ion-button>
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="aboutMe">
+    <div style="display: flex">
+      <h3 class="heading" style="width: 85%">About Me</h3>
+      <ion-icon name="create-outline" style="margin-top: 15px"></ion-icon>
+    </div>
+  </ion-card>
+
+  <div *ngIf="bankDetails">
+    <div align="right">
+      <ion-button id="bank-btn">+Add Bank</ion-button>
+    </div>
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <div class="mainDiv">
+            <div class="subDiv">ICICI Bank</div>
+            <div>
+              <img
+                src="../assets/img/verified.png"
+                alt=""
+                style="height: 12px; width: 12px"
+              />
+            </div>
+            <div style="color: green; margin-left: 40%">
+              {{loginTypeData?.bankdetails[0].bankTypeStatus}}
+            </div>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div class="mainDiv">
+            <div class="subDiv">Full Name</div>
+            <div>{{loginTypeData?.bankdetails[0].fullName}}</div>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div class="mainDiv">
+            <div class="subDiv">Account <br />Number</div>
+            <div>{{loginTypeData?.bankdetails[0].accountNumber}}</div>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div class="mainDiv">
+            <div class="subDiv">IFSC Code</div>
+            <div>{{loginTypeData?.bankdetails[0].ifscCode}}</div>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div class="mainDiv">
+            <div class="subDiv">
+              Account <br />
+              Type
+            </div>
+            <div>{{loginTypeData?.bankdetails[0].accountType}}</div>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div class="mainDiv">
+            <div class="subDiv">
+              Created <br />
+              Date
+            </div>
+            <div>{{formattedCreatedDate}}</div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
+
+  <ion-card *ngIf="languages">
+    <h3 class="heading">My Languages</h3>
+    <ion-list>
+      <!-- *ngFor="let lang of this.common.languagesArray" -->
+      <!-- *ngFor="let lang of loginTypeData?.languages" -->
+      <ion-item *ngFor="let lang of this.common.languagesArray">
+        <div class="mainDiv">
+          <div class="spaceDiv">{{lang.name}}</div>
+          <ion-icon
+            name="trash-outline"
+            style="color: red"
+            (click)="this.common.deleteLang(lang)"
+          ></ion-icon>
+        </div>
+      </ion-item>
+    </ion-list>
+    <div align="center">
+      <ion-button (click)="addLanguage()">+Add Languages</ion-button>
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="specialization">
+    <h3 class="heading">My Services</h3>
+    <ion-list>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="spaceDiv">Vedic</div>
+          <div>
+            <ion-icon name="trash-outline" style="color: red"></ion-icon>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <div align="center">
+      <ion-button>+Add Services</ion-button>
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="gallery">
+    <h3 class="heading">Gallery (0/3)</h3>
+    <div id="gallery-upload">
+      <ion-icon name="image-outline"></ion-icon>
+      <span>Upload Photo</span> <a style="color: blue">Browse</a>
+    </div>
+  </ion-card>
+</ion-content>

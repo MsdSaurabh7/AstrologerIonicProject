@@ -1,0 +1,7 @@
+{
+  "name": "Astrologer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

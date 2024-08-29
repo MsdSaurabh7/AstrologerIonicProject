@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar class="header" >
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <div style="display: flex;align-items: center;margin-left: 10px;">
+      <!-- <ion-icon name="arrow-back-outline"></ion-icon> -->
+    <ion-text style="font-size: 25px; margin-left: 5%;">Profile</ion-text>
+  </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card class="card">
+    <!-- *ngFor="let card of object" -->
+    <div class="corner-text">{{this.data.userData.ratings.description}}</div>
+    <div class="image-slot">
+      <div id="imge">
+    <ion-img src="../assets/img/profile.png"
+    style="border: 1px solid red; border-radius: 50%;"></ion-img>
+    <div>{{this.data.userData.currentStatus}}</div>
+  </div>
+    <ion-chip [outline]="true">
+      <ion-label>{{this.data.userData.ratings.ratingCounter}}</ion-label>
+      <ion-icon id="icon" name="star-sharp"></ion-icon>
+    </ion-chip>
+    
+    <span>{{this.data.userData.receivedOrder}}</span>
+  </div>
+    <div class="card-middle">
+      <ion-card-title>{{this.data.userData.salutation}}</ion-card-title>
+      <span> {{this.data.userData.services[0].serviceTypeCode}}</span>
+      <br>
+      <span>{{this.data.userData.aboutUs.workExperienceInMonth}}</span>
+      <br>
+      <span *ngFor="let lang of this.data.userData.languages">{{lang.languageName}},</span>
+      <br>
+      <span *ngIf=this.data.userData.offer><a style="color: red;">FREE</a> <del>{{this.data.userData.offerAmount}}</del>{{this.data.userData.currency}} 
+        {{this.data.userData.rates}} {{this.data.userData.serviceTimeType}}</span>
+    </div>
+    <div class="cardIcons">
+    <ion-icon name="call-sharp" *ngIf=this.data.userData.availableConsultationType.mediumStatusCall></ion-icon>
+    <ion-icon name="chatbubble-ellipses-sharp" *ngIf=this.data.userData.availableConsultationType.mediumStatusChat></ion-icon>
+    <ion-icon name="videocam-sharp" *ngIf=this.data.userData.availableConsultationType.mediumStatusVideo></ion-icon>
+  </div>
+  </ion-card>
+
+  <ion-title style="font-family: 'Poppins'; font-size: 1rem; font-weight: bold;">
+ 
+    About Us
+ 
+  </ion-title>
+ 
+  <p style="margin-left: 20px; font-family: 'Poppins'; width: 90%; margin: auto; flex-wrap: wrap; text-align: justify; ">{{this.data.userData.aboutUs.description}}</p>
+ 
+  <ion-card style="height: 200px; width: 90%;">
+ 
+    <img style="margin-left: 20px;" src="../assets/{{this.data.userData.aboutUs.profileAstroPhoto}}" alt="Img Not Found">  
+ 
+  </ion-card>
+
+</ion-content>

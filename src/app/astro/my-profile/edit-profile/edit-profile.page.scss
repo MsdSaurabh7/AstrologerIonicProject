@@ -1,0 +1,26 @@
+.header{
+    --background: #f7cf2df6;
+    height: 70px;
+    display: flex;
+}
+#back-icon{
+    font-size: 30px;
+  }
+  .heading{
+    margin-left: 10px;
+    color: black;
+  }
+  .mainDiv{
+    display: flex;
+    width: 100%;
+  }
+  .spaceDiv{
+    width: 85%;
+    font-size: 25px;
+    margin-left: 10px;
+  }
+  ion-button{
+    --background: #f7cf2df6;
+    color: black;
+    margin-bottom: 15px;
+  }

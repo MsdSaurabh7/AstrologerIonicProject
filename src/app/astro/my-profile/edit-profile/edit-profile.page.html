@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar class="header" >
+    <div style="display: flex;align-items: center;margin-left: 10px;">
+      <ion-icon id="back-icon" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    <ion-text style="font-size: 25px; margin-left: 25%; color: black;">Languages</ion-text>
+  </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #f4e9bdf6;">
+  <h2 class="heading">Choose your language</h2>
+  
+      <div class="mainDiv" *ngFor="let lang of this.common.langs">
+        <div class="spaceDiv">{{lang.name}}</div>
+        <ion-checkbox (ionChange)="onCheckboxChange($event, lang)"></ion-checkbox>
+        <!-- [(ngModel)]="lang.selected" -->
+      </div>
+      <div align="center">
+        <ion-button (click)="addSelectedILangs()">Save</ion-button>
+      </div>
+    
+</ion-content>

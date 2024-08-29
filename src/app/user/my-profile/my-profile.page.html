@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar class="header" >
+    <!-- <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()" ></ion-back-button>
+    </ion-buttons> -->
+    <div style="display: flex;align-items: center;margin-left: 10px;">
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    <ion-text style="font-size: 25px; margin-left: 25%;">My Profile</ion-text>
+  </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #f4e9bdf6;">
+
+  <div id="imge" align="center">
+    <ion-img #profileImg src="{{profileImageUrl}}"></ion-img>
+    <div class="camera-circle">
+      <ion-icon name="camera-outline" id="camera-icon" (click)="triggerFileInput()"></ion-icon>
+      </div>
+      <input #fileInput type="file" accept="image/*" style="display: none;" (change)="onFileChange($event)">
+  </div>
+
+  <ion-segment value="buttons" mode="ios" scrollable=true>
+    <ion-segment-button value="buttons" (click)="basicInfoFun()">
+      <ion-label >Basic Info</ion-label>
+    </ion-segment-button>
+    <ion-segment-button  (click)="notificationFun()">
+      <ion-label >Notifications</ion-label>
+    </ion-segment-button>
+    <ion-segment-button  (click)="accountDeactivateFun()">
+      <ion-label >Account Deactivate</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-card *ngIf="basicInfo">
+    <h3 class="heading">Details</h3>
+    <ion-list>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">First Name</div>
+          <div>{{loginTypeData?.firstName}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Last Name</div>
+          <div>{{loginTypeData?.lastName}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Email</div>
+          <div>{{loginTypeData?.email[0].email}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Birth Time</div>
+          <div>{{loginTypeData?.birthTime}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Birth Date</div>
+        <div>{{loginTypeData?.birthDate}}</div>
+      </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Gender</div>
+        <div>{{loginTypeData?.gender}}</div>
+      </div>
+      </ion-item>
+      <ion-item>
+        <div class="mainDiv">
+          <div class="subDiv">Mobile</div>
+        <div>{{loginTypeData?.phone[0].phone}}</div>
+      </div>
+      </ion-item>
+      </ion-list>
+    <h3 class="heading">Place of Birth</h3>
+    <ion-list>
+    <ion-item>
+      <div class="mainDiv">
+        <div class="subDiv">City</div>
+        <div>{{loginTypeData?.address[0].city.cityName}}</div>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="mainDiv">
+        <div class="subDiv">Areacode</div>
+        <div>{{loginTypeData?.address[0].areaCode}}</div>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="mainDiv">
+        <div class="subDiv">State</div>
+        <div>{{loginTypeData?.address[0].state.stateName}}</div>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="mainDiv">
+        <div class="subDiv">Country</div>
+        <div>{{loginTypeData?.address[0].country.countryName}}</div>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="mainDiv">
+        <div class="subDiv">Complete Details</div>
+        <div>{{loginTypeData?.address[0].addressDescription}}</div>
+      </div>
+    </ion-item>
+  </ion-list>
+  <div align="center">
+  <ion-button>+ Edit Profile</ion-button>
+</div>
+  </ion-card>
+
+
+  <ion-card *ngIf="notification">
+    <ion-list mode="ios">
+      <ion-item>
+        <ion-label><ion-toggle>Astro Chat</ion-toggle></ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label><ion-toggle>Live Events</ion-toggle></ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card *ngIf="accountDeactivate" >
+    <h3 class="heading">Account Deactivation</h3>
+    <ion-list>
+      <ion-item>
+    <ion-select mode="ios" label="Choose a reason" label-placement="floating" fill="outline">
+      <ion-select-option value="apple">Just need a break</ion-select-option>
+      <ion-select-option value="banana">Truble getting started</ion-select-option>
+      <ion-select-option value="orange">Privacy concern</ion-select-option>
+      <ion-select-option value="orange">Concerned about my data</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+    <div align="center">
+      <ion-button>Deactivate Account</ion-button>
+    </div>
+  </ion-card>
+ 
+</ion-content>

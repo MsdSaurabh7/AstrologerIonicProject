@@ -1,0 +1,82 @@
+.header{
+    --background: #f7cf2df6;
+    height: 70px;
+    display: flex;
+}
+#imge{
+    ion-img{
+      height: 140px;
+      width: 140px;
+      margin-top: 30px;
+    }
+}
+.mainDiv{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  div{
+    font-size: 14px;
+  }
+}
+.subDiv{
+  width: 35%;
+  font-weight: 500;
+}
+.heading{
+  margin-left: 10px;
+  color: black;
+  font-size: 20px;
+}
+ion-segment {
+  margin-left: 3%;
+  width: 94%;
+  margin-top: 15px;
+  --background: #fff;
+  --indicator-color: var(--ion-color-step-350, var(--ion-background-color-step-350, var(--ion-background-color, #fff)));
+  }
+  ion-card{
+    border-radius: 10px;
+    border-bottom: 5px solid #f7cf2df6;
+  }
+  ion-item{
+    --min-height:30px;
+  }
+  ion-list{
+    margin-left: 10px;
+    // margin-right: 20px;
+  }
+  ion-button{
+    --background: #f7cf2df6;
+    color: black;
+    margin-bottom: 15px;
+  }
+  ion-icon{
+    font-size: 30px;
+  }
+  .camera-circle {
+    position: absolute;
+  
+    top: 97px;
+  
+    left: 233px;
+  
+    height: 25px;
+  
+    width: 25px;
+  
+    border: 1px solid #f7cf2df6;
+  
+    // margin: auto;
+  
+    border-radius: 50%;
+  
+    // text-align: center;
+  
+    background-color: #fff;
+    #camera-icon {
+      margin-top: 2px;
+      color: #f7cf2df6;
+      font-size: 20px;
+    }
+  }
+  
